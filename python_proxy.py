@@ -4,10 +4,9 @@
 import socket
 import thread
 import select
-import requests
 
 BUFLEN = 8192
-VERSION = 'Python Proxy/' + __version__
+VERSION = 'Python Proxy/0.1.0'
 HTTPVER = 'HTTP/1.1'
 
 
@@ -101,4 +100,6 @@ def start_server(host='localhost', port=8080, IPv6=False, timeout=60, handler=Co
         thread.start_new_thread(handler, soc.accept() + (timeout,))
 
 if __name__ == '__main__':
-    start_server()
+    from sys import argv
+    port = int(argv[1]) if len(argv) > 1 else 8080
+    start_server(port=port)
